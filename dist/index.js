@@ -11211,20 +11211,12 @@ class Block {
         }
         const fields = [
             {
-                type: 'mrkdwn',
-                text: `*repository*\n<${repoUrl}|${owner}/${repo}>`
+              type: 'mrkdwn',
+              text: `*repository*\n<${repoUrl}|${owner}/${repo}>`
             },
             {
-                type: 'mrkdwn',
-                text: `*ref*\n${ref}`
-            },
-            {
-                type: 'mrkdwn',
-                text: `*event name*\n${eventUrl}`
-            },
-            {
-                type: 'mrkdwn',
-                text: `*workflow*\n<${actionUrl}|${workflow}>`
+              type: 'mrkdwn',
+              text: `*source*\n${ref}, ${eventUrl}, <${actionUrl}|${workflow}>`
             }
         ];
         return fields;

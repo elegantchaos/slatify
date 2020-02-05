@@ -70,7 +70,7 @@ class Block {
       {
         type: 'mrkdwn',
         text: `*source*\n${ref}, ${eventUrl}, <${actionUrl}|${workflow}>`
-      },
+      }
     ];
     return fields;
   }
