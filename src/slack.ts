@@ -69,16 +69,8 @@ class Block {
       },
       {
         type: 'mrkdwn',
-        text: `*ref*\n${ref}`
+        text: `*source*\n${ref}, ${eventUrl}, <${actionUrl}|${workflow}>`
       },
-      {
-        type: 'mrkdwn',
-        text: `*event name*\n${eventUrl}`
-      },
-      {
-        type: 'mrkdwn',
-        text: `*workflow*\n<${actionUrl}|${workflow}>`
-      }
     ];
     return fields;
   }
