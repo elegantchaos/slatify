@@ -70,6 +70,10 @@ class Block {
       {
         type: 'mrkdwn',
         text: `*source*\n${ref}, ${eventUrl}, <${actionUrl}|${workflow}>`
+    },
+      {
+        type: 'mrkdwn',
+        text: `*badge*\n https://github.com/elegantchaos/Logger/workflows/tests/badge.svg`
       }
     ];
     return fields;
