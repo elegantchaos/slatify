@@ -47,7 +47,7 @@ class Block {
    * Get slack blocks UI
    * @returns {MrkdwnElement[]} blocks
    */
-  public get baseFields(): MrkdwnElement[] {
+  public getBaseFields(jobName: string): MrkdwnElement[] {
     const {sha, eventName, workflow, ref} = this.context;
     const {owner, repo} = this.context.repo;
     const {number} = this.context.issue;
@@ -65,15 +65,7 @@ class Block {
     const fields: MrkdwnElement[] = [
       {
         type: 'mrkdwn',
-        text: `*repository*\n<${repoUrl}|${owner}/${repo}>`
-      },
-      {
-        type: 'mrkdwn',
-        text: `*source*\n${ref}, ${eventUrl}, <${actionUrl}|${workflow}>`
-    },
-      {
-        type: 'mrkdwn',
-        text: `*badge*\n https://github.com/elegantchaos/Logger/workflows/tests/badge.svg`
+        text: `<${actionUrl}|${workflow} / ${jobName}>`
       }
     ];
     return fields;
@@ -143,14 +135,15 @@ export class Slack {
   ): Promise<IncomingWebhookSendArguments> {
     const slackBlockUI = new Block();
     const notificationType: Accessory = slackBlockUI[status];
-    const tmpText: string = `${jobName} ${notificationType.result}`;
+    const {owner, repo} = github.context.repo;
+    const tmpText: string = `${owner}/${repo} ${notificationType.result}`;
     const text =
       mention && this.isMention(mentionCondition, status)
         ? `<!${mention}> ${tmpText}`
         : tmpText;
     let baseBlock = {
       type: 'section',
-      fields: slackBlockUI.baseFields
+      fields: slackBlockUI.getBaseFields(jobName)
     };
 
     if (commitFlag && token) {
