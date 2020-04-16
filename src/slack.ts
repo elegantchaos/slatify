@@ -20,14 +20,14 @@ class Block {
   public get success(): Accessory {
     return {
       color: '#2cbe4e',
-      result: 'Succeeded'
+      result: 'Success'
     };
   }
 
   public get failure(): Accessory {
     return {
       color: '#cb2431',
-      result: 'Failed'
+      result: 'Failure'
     };
   }
 
@@ -136,10 +136,10 @@ export class Slack {
     const slackBlockUI = new Block();
     const notificationType: Accessory = slackBlockUI[status];
     const {owner, repo} = github.context.repo;
-    const tmpText: string = `${owner}/${repo} ${notificationType.result}`;
+    const tmpText: string = `${notificationType.result}: *${owner}/${repo}*`;
     const text =
       mention && this.isMention(mentionCondition, status)
-        ? `<!${mention}> ${tmpText}`
+        ? `${tmpText} <!${mention}>`
         : tmpText;
     let baseBlock = {
       type: 'section',

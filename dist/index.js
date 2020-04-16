@@ -11173,13 +11173,13 @@ class Block {
     get success() {
         return {
             color: '#2cbe4e',
-            result: 'Succeeded'
+            result: 'Success'
         };
     }
     get failure() {
         return {
             color: '#cb2431',
-            result: 'Failed'
+            result: 'Failure'
         };
     }
     get cancelled() {
@@ -11275,9 +11275,9 @@ class Slack {
             const slackBlockUI = new Block();
             const notificationType = slackBlockUI[status];
             const { owner, repo } = github.context.repo;
-            const tmpText = `${owner}/${repo} ${notificationType.result}`;
+            const tmpText = `${notificationType.result}: *${owner}/${repo}*`;
             const text = mention && this.isMention(mentionCondition, status)
-                ? `<!${mention}> ${tmpText}`
+                ? `${tmpText} <!${mention}>`
                 : tmpText;
             let baseBlock = {
                 type: 'section',
