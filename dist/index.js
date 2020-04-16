@@ -11213,7 +11213,7 @@ class Block {
         const fields = [
             {
                 type: 'mrkdwn',
-                text: `<${actionUrl}|${workflow} (${jobName})>`
+                text: `<${actionUrl}|${jobName} – ${workflow}>`
             }
         ];
         return fields;
@@ -11275,7 +11275,7 @@ class Slack {
             const slackBlockUI = new Block();
             const notificationType = slackBlockUI[status];
             const { owner, repo } = github.context.repo;
-            const tmpText = `${notificationType.result} *${owner}/${repo}*`;
+            const tmpText = `${notificationType.result} *${owner}/${repo}*.`;
             const text = mention && this.isMention(mentionCondition, status)
                 ? `${tmpText} <!${mention}>`
                 : tmpText;
